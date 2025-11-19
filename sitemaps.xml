@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset 
+ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+ xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
+<!-- الصفحة الرئيسية -->
+<url>
+ <loc>https://dikuratbeitak.com/</loc>
+ <priority>1.0</priority>
+</url>
+
+<!-- المدونة -->
+<url>
+ <loc>https://dikuratbeitak.com/blogs.html</loc>
+ <priority>0.9</priority>
+</url>
+
+<!-- صفحة الاتصال -->
+<url>
+ <loc>https://dikuratbeitak.com/contact.html</loc>
+ <priority>0.9</priority>
+</url>
+
+<!-- صفحة المقال الديناميكية -->
+<url>
+ <loc>https://dikuratbeitak.com/post.html</loc>
+ <priority>0.8</priority>
+</url>
+
+<!-- فئة الجدران -->
+<url><loc>https://dikuratbeitak.com/decoreatgidran.html</loc></url>
+<url><loc>https://dikuratbeitak.com/categorywallswood.html</loc></url>
+<url><loc>https://dikuratbeitak.com/categorywallsmarble.html</loc></url>
+<url><loc>https://dikuratbeitak.com/categorywallschipboard.html</loc></url>
+<url><loc>https://dikuratbeitak.com/categorywallsfoam.html</loc></url>
+<url><loc>https://dikuratbeitak.com/categorywallsmirror.html</loc></url>
+<url><loc>https://dikuratbeitak.com/categorywallsmodern.html</loc></url>
+<url><loc>https://dikuratbeitak.com/categorywallsverticalrollerblinds.html</loc></url>
+<url><loc>https://dikuratbeitak.com/categorywallssteelstrips.html</loc></url>
+<url><loc>https://dikuratbeitak.com/categorywallspartition.html</loc></url>
+<url><loc>https://dikuratbeitak.com/categorywallswallpaper.html</loc></url>
+
+<!-- فئة الأسقف -->
+<url><loc>https://dikuratbeitak.com/decoreatasqof.html</loc></url>
+<url><loc>https://dikuratbeitak.com/categoryceilingsgypsum.html</loc></url>
+<url><loc>https://dikuratbeitak.com/categoryceilingsstretch.html</loc></url>
+<url><loc>https://dikuratbeitak.com/categoryceilingswood.html</loc></url>
+<url><loc>https://dikuratbeitak.com/categoryceilingsaluminum.html</loc></url>
+
+<!-- فئة الأرضيات -->
+<url><loc>https://dikuratbeitak.com/terkeebardaet.html</loc></url>
+<url><loc>https://dikuratbeitak.com/categoryfloorswood.html</loc></url>
+<url><loc>https://dikuratbeitak.com/categoryfloorsrubber.html</loc></url>
+<url><loc>https://dikuratbeitak.com/categoryfloorscarpet.html</loc></url>
+<url><loc>https://dikuratbeitak.com/categoryfloorscomplete.html</loc></url>
+
+<!-- فئة التشطيبات -->
+<url><loc>https://dikuratbeitak.com/tashtibatmotakamelah.html</loc></url>
+<url><loc>https://dikuratbeitak.com/categoryfinishingaccordiondoors.html</loc></url>
+<url><loc>https://dikuratbeitak.com/categoryfinishinggypsum.html</loc></url>
+<url><loc>https://dikuratbeitak.com/categoryfinishingpaint.html</loc></url>
+<url><loc>https://dikuratbeitak.com/categoryfinishingflooring.html</loc></url>
+
+</urlset>
