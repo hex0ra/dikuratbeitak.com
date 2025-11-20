@@ -40,10 +40,12 @@ document.addEventListener("DOMContentLoaded", async () => {
           if (item !== parent) {
             item.classList.remove("open");
             const link = item.querySelector("a");
-            if (link) link.setAttribute("aria-expanded", "false");
-            const otherSubmenu = link ? link.nextElementSibling : null;
-            if (otherSubmenu && otherSubmenu.classList.contains("dropdown-menu")) {
-              otherSubmenu.style.maxHeight = "0";
+            if (link) {
+              link.setAttribute("aria-expanded", "false");
+              const otherSubmenu = link.nextElementSibling;
+              if (otherSubmenu && otherSubmenu.classList.contains("dropdown-menu")) {
+                otherSubmenu.style.maxHeight = "0";
+              }
             }
           }
         });
