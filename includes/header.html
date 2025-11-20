@@ -4,21 +4,9 @@
     <img src="/logodikoratbitk.webp" alt="ديكورات بيتك">
   </div>
 
-  <button class="menu-toggle" aria-label="فتح القائمة">
+  <button class="menu-toggle" aria-label="فتح القائمة" aria-expanded="false">
     <i class="fa-solid fa-bars"></i>
   </button>
-
-  <style>
-    /* Mobile dropdown arrows + show/hide behavior for dropdown menus on small screens */
-    .drop-arrow{ display:none; transition: transform .25s ease; font-size:14px; margin-left:8px; }
-    @media (max-width: 1024px) {
-      .nav-menu .drop-arrow{ display:inline-block; }
-      /* hide dropdown menus by default on mobile, show when parent has .open */
-      .nav-menu .dropdown-menu{ display: none !important; }
-      .nav-menu .dropdown.open > .dropdown-menu{ display: block !important; }
-      .nav-menu .dropdown.open > a .drop-arrow{ transform: rotate(90deg); }
-    }
-  </style>
 
            <!-- قائمة التَنقّل -->
     <nav class="main-nav" aria-label="القائمة الرئيسية">
@@ -27,7 +15,7 @@
                     <li><a href="/blogs.html">المدونة</a></li>
                     
   <li class="dropdown">
-    <a href="/decoreatgidran.html">ديكورات جدراان <span class="drop-arrow" aria-hidden="true">▸</span></a>
+    <a href="/decoreatgidran.html" aria-expanded="false">ديكورات جدراان <span class="drop-arrow" aria-hidden="true">▸</span></a>
     <ul class="dropdown-menu">
       <li><a href="/categorywallswood.html">بديل الخشب</a></li>
       <li><a href="/categorywallsmarble.html">بديل الرخام</a></li>
@@ -43,7 +31,7 @@
     </ul>
   </li>
                     <li class="dropdown">
-  <a href="/decoreatasqof.html">ديكورات اسقف <span class="drop-arrow" aria-hidden="true">▸</span></a>
+  <a href="/decoreatasqof.html" aria-expanded="false">ديكورات اسقف <span class="drop-arrow" aria-hidden="true">▸</span></a>
   <ul class="dropdown-menu">
     <li><a href="/categoryceilingsgypsum.html">اسقف جبس</a></li>
     <li><a href="/categoryceilingsstretch.html">اسقف استرتش مضيئة</a></li>
@@ -52,7 +40,7 @@
   </ul>
 </li>
                     <li class="dropdown">
-  <a href="/terkeebardaet.html">تركيب ارضيات </i> <span class="drop-arrow" aria-hidden="true">▸</span></a>
+  <a href="/terkeebardaet.html" aria-expanded="false">تركيب ارضيات </i> <span class="drop-arrow" aria-hidden="true">▸</span></a>
   <ul class="dropdown-menu">
     <li><a href="/categoryfloorswood.html">ارضيات خشب باركيه</a></li>
     <li><a href="/categoryfloorsrubber.html">ارضيات مطاط ربل</a></li>
@@ -61,7 +49,7 @@
   </ul>
 </li>
   <li class="dropdown">
-    <a href="/tashtibatmotakamelah.html">تشطيبات متكاملة </i> <span class="drop-arrow" aria-hidden="true">▸</span></a>
+    <a href="/tashtibatmotakamelah.html" aria-expanded="false">تشطيبات متكاملة </i> <span class="drop-arrow" aria-hidden="true">▸</span></a>
     <ul class="dropdown-menu">
       <li><a href="/categoryfinishinggypsum.html">جبس بورد</a></li>
       <li><a href="/categoryfinishingpaint.html">دهانات داخلية</a></li>
