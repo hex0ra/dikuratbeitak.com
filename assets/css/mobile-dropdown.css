@@ -1,0 +1,37 @@
+/* Mobile dropdown arrows + show/hide behavior for dropdown menus on small screens */
+.drop-arrow {
+  display: none;
+  transition: transform 0.25s ease;
+  font-size: 14px;
+  margin-left: 8px;
+}
+
+@media (max-width: 1024px) {
+  .nav-menu .drop-arrow {
+    display: inline-block;
+  }
+  
+  /* hide dropdown menus by default on mobile, show when parent has .open */
+  .nav-menu .dropdown-menu {
+    display: none !important;
+  }
+  
+  .nav-menu .dropdown.open > .dropdown-menu {
+    display: block !important;
+  }
+  
+  .nav-menu .dropdown.open > a .drop-arrow {
+    transform: rotate(90deg);
+  }
+}
+
+/* Desktop behavior - ensure dropdowns work normally on larger screens */
+@media (min-width: 1025px) {
+  .drop-arrow {
+    display: none;
+  }
+  
+  .nav-menu .dropdown-menu {
+    display: block;
+  }
+}
