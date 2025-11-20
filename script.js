@@ -12,13 +12,69 @@ document.addEventListener("DOMContentLoaded", async () => {
       toggleButton.addEventListener("click", () => {
         const isActive = navMenu.classList.toggle("active");
         document.body.classList.toggle("menu-open", isActive);
+        // Update aria-expanded attribute
+        toggleButton.setAttribute("aria-expanded", isActive);
       });
 
-      // إغلاق عند الضغط على أي رابط
+      // Mobile dropdown handler using event delegation
+      navMenu.addEventListener("click", (e) => {
+        // Only handle clicks on mobile (<=1024px)
+        if (window.innerWidth > 1024) return;
+
+        // Find the closest dropdown link
+        const dropdownLink = e.target.closest(".dropdown > a");
+        if (!dropdownLink) return;
+
+        e.preventDefault();
+
+        const parent = dropdownLink.parentElement;
+        const submenu = dropdownLink.nextElementSibling;
+        
+        // Null check for submenu
+        if (!submenu || !submenu.classList.contains("dropdown-menu")) return;
+        
+        const isOpen = parent.classList.contains("open");
+
+        // Close all other dropdowns (accordion behavior)
+        document.querySelectorAll(".dropdown").forEach(item => {
+          if (item !== parent) {
+            item.classList.remove("open");
+            const link = item.querySelector("a");
+            if (link) {
+              link.setAttribute("aria-expanded", "false");
+              const otherSubmenu = link.nextElementSibling;
+              if (otherSubmenu && otherSubmenu.classList.contains("dropdown-menu")) {
+                otherSubmenu.style.maxHeight = "0";
+              }
+            }
+          }
+        });
+
+        // Toggle current dropdown
+        parent.classList.toggle("open");
+        dropdownLink.setAttribute("aria-expanded", !isOpen);
+
+        // Animate submenu with dynamically calculated max-height
+        if (!isOpen) {
+          submenu.style.maxHeight = submenu.scrollHeight + "px";
+        } else {
+          submenu.style.maxHeight = "0";
+        }
+      });
+
+      // إغلاق عند الضغط على أي رابط (but not dropdown toggle links)
       navMenu.querySelectorAll("a").forEach(link => {
+        // Skip dropdown parent links
+        if (link.parentElement.classList.contains("dropdown") && 
+            link.nextElementSibling && 
+            link.nextElementSibling.classList.contains("dropdown-menu")) {
+          return;
+        }
+        
         link.addEventListener("click", () => {
           navMenu.classList.remove("active");
           document.body.classList.remove("menu-open");
+          toggleButton.setAttribute("aria-expanded", "false");
         });
       });
 
@@ -31,31 +87,29 @@ document.addEventListener("DOMContentLoaded", async () => {
         ) {
           navMenu.classList.remove("active");
           document.body.classList.remove("menu-open");
+          toggleButton.setAttribute("aria-expanded", "false");
         }
+      });
+
+      // Cleanup on resize - close dropdowns when switching to desktop
+      let resizeTimer;
+      window.addEventListener("resize", () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+          if (window.innerWidth > 1024) {
+            // Close all mobile dropdowns when switching to desktop
+            document.querySelectorAll(".dropdown").forEach(item => {
+              item.classList.remove("open");
+              const link = item.querySelector("a");
+              if (link) link.setAttribute("aria-expanded", "false");
+              const submenu = item.querySelector(".dropdown-menu");
+              if (submenu) submenu.style.maxHeight = "";
+            });
+          }
+        }, 250);
       });
     });
 
-});
-const dropdownLinks = document.querySelectorAll(".dropdown > a");
-
-dropdownLinks.forEach(link => {
-  link.addEventListener("click", function (e) {
-
-    if (window.innerWidth > 1024) return;
-
-    e.preventDefault();
-
-    let parent = this.parentElement;
-    let submenu = this.nextElementSibling;
-
-    document.querySelectorAll(".dropdown").forEach(item => {
-      if (item !== parent) {
-        item.classList.remove("open");
-      }
-    });
-
-    parent.classList.toggle("open");
-  });
 });
 
 // gallery.js
