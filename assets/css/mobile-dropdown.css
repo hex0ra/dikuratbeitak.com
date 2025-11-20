@@ -1,0 +1,32 @@
+/* Mobile dropdown behaviour for navigation (keeps changes isolated) */
+.drop-arrow {
+  display: none;
+  transition: transform .25s ease;
+  font-size: 14px;
+  margin-left: 8px;
+}
+
+@media (max-width: 1024px) {
+  .drop-arrow { display: inline-block; }
+
+  .nav-menu .dropdown-menu {
+    display: block; /* required so JS can calculate scrollHeight */
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height .28s ease;
+    padding-left: 0;
+    margin: 0;
+  }
+
+  .nav-menu .dropdown.open > .dropdown-menu {
+    max-height: 1000px; /* JS will set a precise maxHeight on open */
+  }
+
+  .nav-menu .dropdown.open > a .drop-arrow {
+    transform: rotate(90deg);
+  }
+}
+
+@media (min-width: 1025px) {
+  .nav-menu .dropdown-menu { max-height: none !important; overflow: visible; }
+}
