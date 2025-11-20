@@ -11,6 +11,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       // فتح/إغلاق القائمة
       toggleButton.addEventListener("click", () => {
         const isActive = navMenu.classList.toggle("active");
+        toggleButton.setAttribute("aria-expanded", isActive);
         document.body.classList.toggle("menu-open", isActive);
       });
 
@@ -18,6 +19,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       navMenu.querySelectorAll("a").forEach(link => {
         link.addEventListener("click", () => {
           navMenu.classList.remove("active");
+          toggleButton.setAttribute("aria-expanded", "false");
           document.body.classList.remove("menu-open");
         });
       });
@@ -30,32 +32,55 @@ document.addEventListener("DOMContentLoaded", async () => {
           !e.target.closest(".menu-toggle")
         ) {
           navMenu.classList.remove("active");
+          toggleButton.setAttribute("aria-expanded", "false");
           document.body.classList.remove("menu-open");
         }
       });
+
+      // Mobile dropdown handler - using event delegation
+      navMenu.addEventListener("click", (e) => {
+        // Only handle on mobile viewports
+        if (window.innerWidth > 1024) return;
+
+        // Check if clicked element is a dropdown link or its child
+        const dropdownLink = e.target.closest(".dropdown > a");
+        if (!dropdownLink) return;
+
+        e.preventDefault();
+
+        const parent = dropdownLink.parentElement;
+        const isOpen = parent.classList.contains("open");
+
+        // Close all other dropdowns (accordion behavior)
+        document.querySelectorAll(".dropdown").forEach(item => {
+          if (item !== parent) {
+            item.classList.remove("open");
+            const link = item.querySelector("a");
+            if (link) link.setAttribute("aria-expanded", "false");
+          }
+        });
+
+        // Toggle current dropdown
+        parent.classList.toggle("open");
+        dropdownLink.setAttribute("aria-expanded", !isOpen);
+      });
+
+      // Cleanup on resize - close all dropdowns when switching to desktop
+      let resizeTimer;
+      window.addEventListener("resize", () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+          if (window.innerWidth > 1024) {
+            document.querySelectorAll(".dropdown").forEach(item => {
+              item.classList.remove("open");
+              const link = item.querySelector("a");
+              if (link) link.setAttribute("aria-expanded", "false");
+            });
+          }
+        }, 250);
+      });
     });
 
-});
-const dropdownLinks = document.querySelectorAll(".dropdown > a");
-
-dropdownLinks.forEach(link => {
-  link.addEventListener("click", function (e) {
-
-    if (window.innerWidth > 1024) return;
-
-    e.preventDefault();
-
-    let parent = this.parentElement;
-    let submenu = this.nextElementSibling;
-
-    document.querySelectorAll(".dropdown").forEach(item => {
-      if (item !== parent) {
-        item.classList.remove("open");
-      }
-    });
-
-    parent.classList.toggle("open");
-  });
 });
 
 // gallery.js
