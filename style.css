@@ -2942,6 +2942,18 @@ nav.main-nav ul li.dropdown > a::after {
   .footer-logo{ margin: 0 0 12px 0; }
   .back-to-top{ right: 12px; bottom: 12px; }
 }
+/* القوائم الفرعية داخل قائمة الجوال */
+.dropdown-menu {
+  display: none; /* مخفية افتراضياً */
+  background: #fff;
+  margin-top: 10px;
+  border-radius: 10px;
+  padding: 10px 15px;
+}
+
+.dropdown.open .dropdown-menu {
+  display: block !important;
+}
 
 
 
