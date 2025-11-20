@@ -29,6 +29,10 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         const parent = dropdownLink.parentElement;
         const submenu = dropdownLink.nextElementSibling;
+        
+        // Null check for submenu
+        if (!submenu || !submenu.classList.contains("dropdown-menu")) return;
+        
         const isOpen = parent.classList.contains("open");
 
         // Close all other dropdowns (accordion behavior)
@@ -37,6 +41,10 @@ document.addEventListener("DOMContentLoaded", async () => {
             item.classList.remove("open");
             const link = item.querySelector("a");
             if (link) link.setAttribute("aria-expanded", "false");
+            const otherSubmenu = link ? link.nextElementSibling : null;
+            if (otherSubmenu && otherSubmenu.classList.contains("dropdown-menu")) {
+              otherSubmenu.style.maxHeight = "0";
+            }
           }
         });
 
@@ -44,7 +52,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         parent.classList.toggle("open");
         dropdownLink.setAttribute("aria-expanded", !isOpen);
 
-        // Animate submenu with max-height
+        // Animate submenu with dynamically calculated max-height
         if (!isOpen) {
           submenu.style.maxHeight = submenu.scrollHeight + "px";
         } else {
