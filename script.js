@@ -506,4 +506,30 @@ document.addEventListener("DOMContentLoaded", () => {
     chev.style.transform = expanded ? "rotate(0deg)" : "rotate(180deg)";
   });
 });
+document.addEventListener("DOMContentLoaded", function () {
+
+  // جميع أقسام القائمة التي تحتوي قوائم فرعية
+  const dropdowns = document.querySelectorAll(".dropdown");
+
+  dropdowns.forEach(drop => {
+    const link = drop.querySelector("a");               // الرابط الرئيسي
+    const submenu = drop.querySelector(".dropdown-menu"); // القائمة الفرعية
+
+    // لما المستخدم يضغط على القسم
+    link.addEventListener("click", function (e) {
+
+      // لو القائمة الفرعية مخفية → افتحها
+      if (!drop.classList.contains("open")) {
+        e.preventDefault();            // يمنع الانتقال للرابط
+        drop.classList.add("open");
+        submenu.style.display = "block";
+      } else {
+        // لو مفتوحة → خلي الرابط يشتغل طبيعي
+        // ما نمنع الضغط
+      }
+    });
+  });
+
+});
+
 
