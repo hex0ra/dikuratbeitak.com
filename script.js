@@ -15,9 +15,15 @@ document.addEventListener("DOMContentLoaded", async () => {
         document.body.classList.toggle("menu-open", isActive);
       });
 
-      // إغلاق عند الضغط على أي رابط
+      // إغلاق عند الضغط على أي رابط (except dropdown parents on mobile)
       navMenu.querySelectorAll("a").forEach(link => {
-        link.addEventListener("click", () => {
+        link.addEventListener("click", (e) => {
+          // Don't close menu if clicking dropdown parent link on mobile
+          const isDropdownParent = link.parentElement.classList.contains("dropdown");
+          if (isDropdownParent && window.innerWidth <= 1024) {
+            return; // Let the dropdown handler deal with it
+          }
+          
           navMenu.classList.remove("active");
           toggleButton.setAttribute("aria-expanded", "false");
           document.body.classList.remove("menu-open");
