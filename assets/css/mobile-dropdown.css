@@ -1,0 +1,45 @@
+/* Mobile Dropdown Styles */
+/* Isolate mobile dropdown CSS for navigation menu */
+
+/* Drop arrow - hidden by default on desktop */
+.drop-arrow {
+  display: none;
+  transition: transform 0.25s ease;
+  font-size: 14px;
+  margin-left: 8px;
+}
+
+/* Mobile-specific styles (1024px and below) */
+@media (max-width: 1024px) {
+  /* Show drop arrow on mobile */
+  .nav-menu .drop-arrow {
+    display: inline-block;
+  }
+
+  /* Hide dropdown menus by default on mobile */
+  .nav-menu .dropdown-menu {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+    display: block !important;
+  }
+
+  /* Show dropdown menu when parent has .open class */
+  .nav-menu .dropdown.open > .dropdown-menu {
+    max-height: 500px;
+    transition: max-height 0.3s ease-in;
+  }
+
+  /* Rotate arrow when dropdown is open */
+  .nav-menu .dropdown.open > a .drop-arrow {
+    transform: rotate(90deg);
+  }
+}
+
+/* Ensure desktop behavior is unaffected */
+@media (min-width: 1025px) {
+  .nav-menu .dropdown-menu {
+    /* Desktop hover behavior remains intact */
+    /* Styles from main stylesheet apply */
+  }
+}

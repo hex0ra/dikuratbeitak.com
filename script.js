@@ -11,13 +11,46 @@ document.addEventListener("DOMContentLoaded", async () => {
       // فتح/إغلاق القائمة
       toggleButton.addEventListener("click", () => {
         const isActive = navMenu.classList.toggle("active");
+        toggleButton.setAttribute("aria-expanded", isActive);
         document.body.classList.toggle("menu-open", isActive);
       });
 
-      // إغلاق عند الضغط على أي رابط
+      // Mobile dropdown behavior with event delegation
+      navMenu.addEventListener("click", (e) => {
+        // Only handle clicks on dropdown links on mobile
+        if (window.innerWidth > 1024) return;
+
+        const dropdownLink = e.target.closest(".dropdown > a");
+        if (!dropdownLink) return;
+
+        e.preventDefault();
+
+        const parent = dropdownLink.parentElement;
+        const isOpen = parent.classList.contains("open");
+
+        // Close all other dropdowns (accordion behavior)
+        document.querySelectorAll(".dropdown").forEach(item => {
+          if (item !== parent) {
+            item.classList.remove("open");
+            const link = item.querySelector("a");
+            if (link) link.setAttribute("aria-expanded", "false");
+          }
+        });
+
+        // Toggle current dropdown
+        parent.classList.toggle("open");
+        dropdownLink.setAttribute("aria-expanded", !isOpen);
+      });
+
+      // إغلاق عند الضغط على أي رابط (but not dropdown toggles)
       navMenu.querySelectorAll("a").forEach(link => {
-        link.addEventListener("click", () => {
+        link.addEventListener("click", (e) => {
+          // Don't close menu when clicking dropdown toggles on mobile
+          if (window.innerWidth <= 1024 && link.parentElement.classList.contains("dropdown")) {
+            return;
+          }
           navMenu.classList.remove("active");
+          toggleButton.setAttribute("aria-expanded", "false");
           document.body.classList.remove("menu-open");
         });
       });
@@ -30,32 +63,27 @@ document.addEventListener("DOMContentLoaded", async () => {
           !e.target.closest(".menu-toggle")
         ) {
           navMenu.classList.remove("active");
+          toggleButton.setAttribute("aria-expanded", "false");
           document.body.classList.remove("menu-open");
         }
       });
+
+      // Cleanup on resize - close all dropdowns when switching to desktop
+      let resizeTimer;
+      window.addEventListener("resize", () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+          if (window.innerWidth > 1024) {
+            document.querySelectorAll(".dropdown").forEach(item => {
+              item.classList.remove("open");
+              const link = item.querySelector("a");
+              if (link) link.setAttribute("aria-expanded", "false");
+            });
+          }
+        }, 250);
+      });
     });
 
-});
-const dropdownLinks = document.querySelectorAll(".dropdown > a");
-
-dropdownLinks.forEach(link => {
-  link.addEventListener("click", function (e) {
-
-    if (window.innerWidth > 1024) return;
-
-    e.preventDefault();
-
-    let parent = this.parentElement;
-    let submenu = this.nextElementSibling;
-
-    document.querySelectorAll(".dropdown").forEach(item => {
-      if (item !== parent) {
-        item.classList.remove("open");
-      }
-    });
-
-    parent.classList.toggle("open");
-  });
 });
 
 // gallery.js
@@ -505,31 +533,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const chev = toggle.querySelector(".chev");
     chev.style.transform = expanded ? "rotate(0deg)" : "rotate(180deg)";
   });
-});
-document.addEventListener("DOMContentLoaded", function () {
-
-  // جميع أقسام القائمة التي تحتوي قوائم فرعية
-  const dropdowns = document.querySelectorAll(".dropdown");
-
-  dropdowns.forEach(drop => {
-    const link = drop.querySelector("a");               // الرابط الرئيسي
-    const submenu = drop.querySelector(".dropdown-menu"); // القائمة الفرعية
-
-    // لما المستخدم يضغط على القسم
-    link.addEventListener("click", function (e) {
-
-      // لو القائمة الفرعية مخفية → افتحها
-      if (!drop.classList.contains("open")) {
-        e.preventDefault();            // يمنع الانتقال للرابط
-        drop.classList.add("open");
-        submenu.style.display = "block";
-      } else {
-        // لو مفتوحة → خلي الرابط يشتغل طبيعي
-        // ما نمنع الضغط
-      }
-    });
-  });
-
 });
 
 
