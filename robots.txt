@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://dikuratbeitak.com/sitemaps.xml
+Sitemap: https://dikuratbeitak.com/sitemap.xml
