@@ -221,7 +221,9 @@ background-color: #fff;
 /* تصميم الصناديق */
 .stat-box {
   width: 260px;
-  height: 150px;
+  min-height: 170px;       /* ارتفاع ثابت يمنع الاهتزاز */
+  padding-top: 20px;       /* يمنع تمدد النص عند تحميل الخط */
+  padding-bottom: 20px;
   border-radius: 80px;
   display: flex;
   flex-direction: column;
@@ -237,16 +239,19 @@ background-color: #fff;
 
 /* رقم الإحصائية */
 .stat-box h3 {
-  font-size: 40px;
-  margin: 0;
-  font-weight: 800;
+    font-size: 40px;
+    font-weight: 800;
+    line-height: 1; 
+    min-height: 48px;        /* يمنع القفز */
+    margin: 0;
 }
 
 /* النص أسفل الرقم */
 .stat-box p {
   margin: 10px 0 0;
-  font-size: 18px;
-  font-weight: 600;
+    font-size: 18px;
+    line-height: 1.4;
+    min-height: 20px;        /* يثبت الجملة أسفل الرقم */
 }
 
 /* تأثير عند مرور الماوس */
@@ -308,6 +313,9 @@ background-color: #fff;
   .nav-menu.active{transform: translateX(0); } /* تظهر عند التفعيل */
   
   .nav-menu li{
+    min-height: 48px;   /* يمنع القفز */
+    display: flex;
+    align-items: center;
     width: 100%;
     text-align: right;
     padding: 14px 20px;
